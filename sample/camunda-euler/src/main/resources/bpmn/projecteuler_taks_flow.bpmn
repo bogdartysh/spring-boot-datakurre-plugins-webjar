@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_03cxsbl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="Process_project_euler_paid" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="початок" camunda:formRef="Form_task_selection" camunda:formRefBinding="latest">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="email" label="email" type="string" />
+          <camunda:formField id="nomer_zavdannia" label="номер завдання" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0fj6qqt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0fj6qqt" sourceRef="StartEvent_1" targetRef="Gateway_1z09quj" />
+    <bpmn:sequenceFlow id="Flow_04hmlls" sourceRef="Activity_task_one_solution" targetRef="Event_1h91fn6" />
+    <bpmn:endEvent id="Event_08k98aw" name="кінець">
+      <bpmn:incoming>Flow_13lwll9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_task_one_solution" name="виріши завдання" camunda:delegateExpression="${CalculateTaskOneDelegate}">
+      <bpmn:incoming>Flow_0rl45qy</bpmn:incoming>
+      <bpmn:outgoing>Flow_04hmlls</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateThrowEvent id="Event_1h91fn6" name="відправ результат">
+      <bpmn:incoming>Flow_04hmlls</bpmn:incoming>
+      <bpmn:incoming>Flow_0g5xj16</bpmn:incoming>
+      <bpmn:outgoing>Flow_13lwll9</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0502ekg" camunda:delegateExpression="${sendResults}" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_13lwll9" sourceRef="Event_1h91fn6" targetRef="Event_08k98aw" />
+    <bpmn:exclusiveGateway id="Gateway_1z09quj" name="чи достатньо коштів" default="Flow_0rl45qy">
+      <bpmn:incoming>Flow_0fj6qqt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mtwmzk</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0rl45qy</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1mtwmzk" name="ні" sourceRef="Gateway_1z09quj" targetRef="Event_0sg8r70">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${email == 'test' }</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0rl45qy" name="так" sourceRef="Gateway_1z09quj" targetRef="Activity_task_one_solution" />
+    <bpmn:boundaryEvent id="Event_1j3vs72" attachedToRef="Activity_task_one_solution">
+      <bpmn:outgoing>Flow_1jb0kbh</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1m4xet0" />
+    </bpmn:boundaryEvent>
+    <bpmn:userTask id="Activity_1c4n5cs" name="виріши завдання" camunda:formRef="" camunda:formRefBinding="latest" camunda:assignee="admin" camunda:priority="1">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="answer" label="результат" type="long" />
+          <camunda:formField id="repeat_task" label="номер завдання" type="long" defaultValue="${nomer_zavdannia}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jb0kbh</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g5xj16</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0g5xj16" sourceRef="Activity_1c4n5cs" targetRef="Event_1h91fn6" />
+    <bpmn:endEvent id="Event_1fho7wo" name="повідомити що не встигаємо">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${sendTextEmailDelegate}" event="start">
+          <camunda:field name="text">
+            <camunda:string>нажаль не встигаємо відповісти, вам будуть повернуті гроші</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_05c4v0c</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0qkphe7" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_0sg8r70" name="відправ повідомлення поповніть рахунок">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${sendTextEmailDelegate}" event="start">
+          <camunda:field name="text">
+            <camunda:string>недостатньо коштів</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1mtwmzk</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_19s1a39" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_1s5z0tr" name="10 c" attachedToRef="Activity_1c4n5cs">
+      <bpmn:outgoing>Flow_05c4v0c</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1qsvtse">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_05c4v0c" sourceRef="Event_1s5z0tr" targetRef="Event_1fho7wo" />
+    <bpmn:sequenceFlow id="Flow_1jb0kbh" sourceRef="Event_1j3vs72" targetRef="Activity_1c4n5cs" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_project_euler_paid">
+      <bpmndi:BPMNEdge id="Flow_0fj6qqt_di" bpmnElement="Flow_0fj6qqt">
+        <di:waypoint x="198" y="387" />
+        <di:waypoint x="335" y="387" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04hmlls_di" bpmnElement="Flow_04hmlls">
+        <di:waypoint x="740" y="387" />
+        <di:waypoint x="902" y="387" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13lwll9_di" bpmnElement="Flow_13lwll9">
+        <di:waypoint x="938" y="387" />
+        <di:waypoint x="1122" y="387" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mtwmzk_di" bpmnElement="Flow_1mtwmzk" bioc:stroke="#fb8c00" color:border-color="#fb8c00">
+        <di:waypoint x="373" y="375" />
+        <di:waypoint x="527" y="232" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="443" y="278" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rl45qy_di" bpmnElement="Flow_0rl45qy">
+        <di:waypoint x="385" y="387" />
+        <di:waypoint x="640" y="387" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="505" y="369" width="16" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g5xj16_di" bpmnElement="Flow_0g5xj16">
+        <di:waypoint x="920" y="270" />
+        <di:waypoint x="920" y="369" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05c4v0c_di" bpmnElement="Flow_05c4v0c" bioc:stroke="#e53935" color:border-color="#e53935">
+        <di:waypoint x="985" y="181" />
+        <di:waypoint x="1124" y="108" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jb0kbh_di" bpmnElement="Flow_1jb0kbh">
+        <di:waypoint x="755" y="337" />
+        <di:waypoint x="870" y="257" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0ch8p90_di" bpmnElement="Event_1h91fn6">
+        <dc:Bounds x="902" y="369" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="895" y="414.5" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="162" y="369" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="412" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1z09quj_di" bpmnElement="Gateway_1z09quj" isMarkerVisible="true">
+        <dc:Bounds x="335" y="362" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="326" y="421.5" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07cgvd7_di" bpmnElement="Activity_task_one_solution">
+        <dc:Bounds x="640" y="347" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0npujhl_di" bpmnElement="Activity_1c4n5cs">
+        <dc:Bounds x="870" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08k98aw_di" bpmnElement="Event_08k98aw">
+        <dc:Bounds x="1122" y="369" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1124" y="412" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pczvkl_di" bpmnElement="Event_1fho7wo">
+        <dc:Bounds x="1122" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1102" y="125" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1b5i7ph_di" bpmnElement="Event_0sg8r70">
+        <dc:Bounds x="522" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="506" y="245" width="72" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f3aasb_di" bpmnElement="Event_1j3vs72">
+        <dc:Bounds x="722" y="329" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dnejwn_di" bpmnElement="Event_1s5z0tr">
+        <dc:Bounds x="952" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="998" y="183" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
