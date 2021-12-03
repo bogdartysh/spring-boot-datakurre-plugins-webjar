@@ -1,8 +1,16 @@
 # spring-boot-datakurre-plugins-webjar
 Minimal "history plugins" for Camunda Cockpit as a webjar library
-
+based on https://github.com/pme123/spring-boot-datakurre-plugins
 ## how-to
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    
+    <dependencies>
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
       <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
@@ -16,7 +24,7 @@ Minimal "history plugins" for Camunda Cockpit as a webjar library
     </dependency>
     
     <dependency>
-         <groupId>org.camunda.bpm.webapp.plugins</groupId>
-         <artifactId>camunda-webapp-datakurre-webjar</artifactId>
-         <version>7.15.0-SNAPSHOT</version>
+            <groupId>com.github.bogdartysh</groupId>
+            <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
+            <version>initial</version>
     </dependency>
