@@ -18,5 +18,5 @@ Minimal "history plugins" for Camunda Cockpit as a webjar library
     <dependency>
          <groupId>org.camunda.bpm.webapp.plugins</groupId>
          <artifactId>camunda-webapp-datakurre-webjar</artifactId>
-         <version>7.15.0</version>
+         <version>7.15.0-SNAPSHOT</version>
     </dependency>
