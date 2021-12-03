@@ -11,20 +11,17 @@ based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.
     </repositories>
     
     <dependencies>
-    <dependency>
-      <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-      <version>7.15.0</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.camunda.bpm.webapp</groupId>
-          <artifactId>camunda-webapp-webjar</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
     
-    <dependency>
+        <dependency>
             <groupId>com.github.bogdartysh</groupId>
             <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
             <version>initial</version>
-    </dependency>
+        </dependency>
+    
+        <dependency>
+           <groupId>org.camunda.bpm.springboot</groupId>
+           <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+           <version>7.15.0</version>
+        </dependency>
+    
+Example: see sample folder
