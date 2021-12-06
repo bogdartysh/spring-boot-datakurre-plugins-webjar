@@ -24,4 +24,6 @@ based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.
            <version>7.15.0</version>
         </dependency>
     
-Example: see sample folder
+## Example
+
+see sample folder
