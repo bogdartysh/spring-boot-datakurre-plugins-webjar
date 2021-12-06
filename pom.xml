@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.camunda.bpm.webapp</groupId>
+    <groupId>com.github.bogdartysh</groupId>
     <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
     <version>7.15.0-421.1</version>
            <description>Minimal "history plugins" for Camunda Cockpit as a webjar library based on https://github.com/datakurre/camunda-cockpit-plugins/</description>
