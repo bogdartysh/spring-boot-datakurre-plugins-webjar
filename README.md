@@ -21,7 +21,7 @@ based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.
         <dependency>
            <groupId>org.camunda.bpm.springboot</groupId>
            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-           <version>7.15.0</version>
+           <version>7.15.0-421.1</version>
         </dependency>
     
 Example: see sample folder
