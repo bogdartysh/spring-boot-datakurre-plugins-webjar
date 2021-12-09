@@ -23,6 +23,8 @@ based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.
            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
            <version>7.15.0</version>
         </dependency>
+        
+[![how-to video (in Ukrainian)](https://img.youtube.com/vi/iKASk6JJKIs/0.jpg)](https://www.youtube.com/watch?v=iKASk6JJKIs)
     
 ## Example
 
