@@ -26,4 +26,4 @@ based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.
     
 ## Example
 
-see sample folder
+see [sample](https://github.com/bogdartysh/spring-boot-datakurre-plugins-webjar/tree/main/sample/camunda-euler) folder
