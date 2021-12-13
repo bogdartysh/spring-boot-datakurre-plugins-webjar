@@ -20,5 +20,13 @@
   <scm>
     <url>https://github.com/bogdartysh/spring-boot-datakurre-plugins-webjar</url>
   </scm>
+         
+<distributionManagement>
+   <repository>
+     <id>github</id>
+     <name>spring-boot-datakurre-plugins-webjar package</name>
+     <url>https://maven.pkg.github.com/bogdartysh/spring-boot-datakurre-plugins-webjar</url>
+   </repository>
+</distributionManagement>
 
 </project>
