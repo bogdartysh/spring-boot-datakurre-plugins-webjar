@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.github.bogdartysh</groupId>
             <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
-            <version>initial</version>
+	    <version>7.15.0-421.1</version>
         </dependency>
         
         <dependency>
@@ -72,8 +72,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>15</source>
-                    <target>15</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
         </plugins>
