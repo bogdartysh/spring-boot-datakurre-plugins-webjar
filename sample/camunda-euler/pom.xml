@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.github.bogdartysh</groupId>
             <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
-	    <version>7.15.0-421.1</version>
+	    <version>7.15.0-421.2</version>
         </dependency>
         
         <dependency>
