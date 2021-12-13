@@ -1,8 +1,8 @@
 # spring-boot-datakurre-plugins-webjar
 Minimal "history plugins" for Camunda Cockpit as a webjar library
 based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.com/datakurre/camunda-cockpit-plugins/
-## how-to
-
+## How-to
+### option 1. using jitpack
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -26,6 +26,8 @@ based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.
         
 [![how-to video (in Ukrainian)](https://img.youtube.com/vi/iKASk6JJKIs/0.jpg)](https://www.youtube.com/watch?v=iKASk6JJKIs)
     
+### option 2. download
+just download  the project, install it into local repo and use
 ## Example
 
 see [sample](https://github.com/bogdartysh/spring-boot-datakurre-plugins-webjar/tree/main/sample/camunda-euler) folder
