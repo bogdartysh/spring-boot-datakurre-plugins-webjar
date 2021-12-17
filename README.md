@@ -4,6 +4,9 @@ Minimal "history plugins" for Camunda Cockpit as a webjar library  https://githu
 based on https://github.com/pme123/spring-boot-datakurre-plugins
 
 ## How-to
+basically you need to put the dependency in pom.xml before camunda itself and that's it.
+
+so as this repo is not yet in maven-central there are two options how to do that.
 ### option 1. using jitpack
     <repositories>
         <repository>
