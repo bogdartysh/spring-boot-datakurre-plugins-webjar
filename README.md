@@ -1,6 +1,8 @@
 # spring-boot-datakurre-plugins-webjar
-Minimal "history plugins" for Camunda Cockpit as a webjar library
-based on https://github.com/pme123/spring-boot-datakurre-plugins https://github.com/datakurre/camunda-cockpit-plugins/
+Minimal "history plugins" for Camunda Cockpit as a webjar library  https://github.com/datakurre/camunda-cockpit-plugins/
+
+based on https://github.com/pme123/spring-boot-datakurre-plugins
+
 ## How-to
 ### option 1. using jitpack
     <repositories>
