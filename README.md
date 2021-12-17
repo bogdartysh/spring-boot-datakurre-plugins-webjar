@@ -20,7 +20,7 @@ so as this repo is not yet in maven-central there are two options how to do that
         <dependency>
             <groupId>com.github.bogdartysh</groupId>
             <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
-           <version>7.15.0-421.2</version>
+           <version>7.15.0-421.1</version>
         </dependency>
     
         <dependency>
@@ -32,6 +32,21 @@ so as this repo is not yet in maven-central there are two options how to do that
     
 ### option 2. download
 just download  the project, install it into local repo and use
+
+    <dependencies>
+    
+        <dependency>
+            <groupId>com.github.bogdartysh</groupId>
+            <artifactId>spring-boot-datakurre-plugins-webjar</artifactId>
+           <version>7.15.0-421.2</version>
+        </dependency>
+    
+        <dependency>
+           <groupId>org.camunda.bpm.springboot</groupId>
+           <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+           <version>7.15.0</version>
+        </dependency>
+        
 ## Example
 
 see [sample](https://github.com/bogdartysh/spring-boot-datakurre-plugins-webjar/tree/main/sample/camunda-euler) folder
