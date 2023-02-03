@@ -19,7 +19,6 @@
          
   <scm>
     <url>https://github.com/bogdartysh/spring-boot-datakurre-plugins-webjar</url>
-           <email>developer@example.com </email>
   </scm>
          
 <distributionManagement>
