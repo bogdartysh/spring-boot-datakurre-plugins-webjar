@@ -33,7 +33,7 @@ so as this repo is not yet in maven-central there are two options how to do that
         
     
 ### option 2. download
-just download  the project, install it into local repo and use
+Just download  the project, install it into local repo and use
 
     <dependencies>
     
